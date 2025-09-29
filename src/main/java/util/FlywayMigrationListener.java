@@ -18,13 +18,12 @@ public class FlywayMigrationListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         try {
             Class.forName("org.postgresql.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/weather_app", "postgres", "lobanoff");
-            if (connection != null) {
-                System.out.println("CONNECTION");
-            }
+            Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/weather_app", "postgres", "lobanoff").load();
+            flyway.migrate();
+            System.out.println("MIGRATION SUCCESSFUL");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("CONNECTION FAILED");
+            System.out.println("MIGRATION FAILED");
         }
     }
 
