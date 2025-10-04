@@ -11,7 +11,7 @@ CREATE TABLE locations (
     longitude DECIMAL NOT NULL
 );
 CREATE TABLE sessions (
-    id VARCHAR(255) PRIMARY KEY,
+    id UUID PRIMARY KEY NOT NULL,
     user_id INT NOT NULL,
-    expires_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    expires_at TIMESTAMP
 );
